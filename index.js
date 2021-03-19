@@ -1,4 +1,4 @@
-/*Javascript for SUMX
+/*Javascript for ESUM
     Created by Vyanna Hill,_____,___,
     Please comment around your work with your name
 */
