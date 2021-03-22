@@ -1,5 +1,5 @@
 /*Javascript for ESUM
-    Created by Vyanna Hill,_____,___,
+    Created by Vyanna Hill
     Please comment around your work with your name
 */
 
