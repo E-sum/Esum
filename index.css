@@ -76,6 +76,13 @@ p{
     font-size: large;
     margin-bottom: 1em;
 }
+
+h2.faq{
+    text-align: center;
+    font-size: large;
+    margin-bottom: 1em;
+}
+
 a:hover{
     font-size: 137%;
     color:black;
