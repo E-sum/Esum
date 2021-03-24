@@ -91,6 +91,16 @@ a:hover{
 a:visited{
     color:maroon;
 }
+/* Added a Button Functionality to create hyperlinks with refernce to button class, Brady Madden */
+a.button{
+    background-color: burlywood;
+    box-shadow: 0 3px black;
+    border-radius: 12px;
+    font-family: 12px;
+    padding: 16px;
+    color:white;
+    transition-duration: 0.4s;
+}
 
 .button{
     border-radius: 12px;
