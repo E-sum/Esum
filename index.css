@@ -1,6 +1,7 @@
 /*
-By: Vyanna Hill
+By: Vyanna Hill, Brady Madden (a.button)
 Style sheet for project 11's main page
+
 */
 
 /* Header*/
@@ -90,6 +91,16 @@ a:hover{
 
 a:visited{
     color:maroon;
+}
+/* Added a Button Functionality to create hyperlinks with refernce to button class, Brady Madden */
+a.button{
+    background-color: burlywood;
+    box-shadow: 0 3px black;
+    border-radius: 12px;
+    font-family: 12px;
+    padding: 16px;
+    color:white;
+    transition-duration: 0.4s;
 }
 
 .button{
