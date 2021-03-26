@@ -1,0 +1,151 @@
+<!--Created by Vyanna Hill, Brady Madden
+    Please comment the section of work added in with your name
+-->
+<!--Vyanna, any unnamed comment is the work above unless marked-->
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/header'); %>
+
+    <body>
+
+
+        <%- include('partials/nav'); %>
+            <!--There will be three pages, the home is where the function happens-->
+            <!--FAQ will answer some questions about our program and how to use-->
+            <!--Future plans will host ideas not used for the project and give-->
+
+            <aside>
+                <!---Cleaned up and added forgot password skeleton, Brady Madden-->
+                <p><label for="welcome" id="welcome">Sign In</label></p>
+                <label for="email" id="elabel">Email:</label>
+                <input type="email" id="email" name="email" placeholder="user@albany.edu" required>
+                <br>
+                <label for="password" id="plabel">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                <br>
+                <br>
+                <button id="btnLog" class="button">Login</button>
+                <p><a href="passreset" id="ForgotPass" class="button">Forgot Your Password?</a></p>
+                <br><button id="btnCC" class="button">View CC'D threads</button>
+                <br><button id="btn1t1" class="button">View 1:1 threads</button>
+                <br><button id="btnOrg" class="button">View original threads</button>
+                <br><button id="btnDel" class="button">Delete group thread</button>
+            </aside>
+            <!--Will connect users to a login page to retrieve their verison of the text file-->
+            <!--javascript will add funcitonaliy-->
+
+            <section>
+                <!-- Edited description on ESUM, Brady-->
+                <h2> Welcome to ESUM</h2>
+                <p> The goal of ESUM is to reduce the clutter of large email threads
+                    <br> and condense these into readable chats.
+                    <br>
+                    <br> Esum will boost the visibility by:
+                <ul>
+                    <li>Increasing spacing in-between threads</li>
+                    <li>Deleting repetive signatures </li>
+                    <li>Email threads styled in chat messaging format</li>
+                </ul>
+                </p>
+
+                <h2>New thread to analyze? </h2>
+                <p>
+                    Upload your Email file below
+
+                <form action="Linktoservernodejs/file_upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="Emaillog" />
+                    <br>
+                    <input type="submit" value="Upload">
+                </form>
+                <!--NODEjs way of submitting forms to the database, express server will listen for input-->
+                <small>How to transfer your email log to a file? Check our <a href="/faq">FAQ</a> </small>
+                <!--Sends confused users to FAQ on how to create text file-->
+                </p>
+            </section>
+
+
+            <script>
+                /*Javascript for Esum
+                     By Vyanna Hill, Braddy Madden
+                     VY:  Gave functionality to the button of login, when clicked log in button is click, the home screen appears
+              */
+
+
+                //Cleaned up, gave better var names and gave functionality to added buttons, Brady Madden
+
+
+                var btnSign = document.getElementById("btnLog");//Login Button
+                var welcome = document.getElementById("welcome");//sucessful login label
+                var forgotpassbtn = document.getElementById("ForgotPass");//Forgot Password Button
+                var eLabel = document.getElementById("elabel");//Labels for email and pass
+                var pLabel = document.getElementById("plabel");
+                var eMail = document.getElementById("email");
+                var pass = document.getElementById("password");
+
+                var btnC = document.getElementById("btnCC");
+                var btn1 = document.getElementById("btn1t1");
+                var btnOrg = document.getElementById("btnOrg");
+                var btnDel = document.getElementById("btnDel");
+                //Buttons for chat nav.
+
+                //Dont Display these buttons when not logged in
+                btn1.style.display = "none";
+                btnOrg.style.display = "none";
+                btnC.style.display = "none";
+                btnDel.style.display = "none";
+
+
+                welcome.innerHTML = "Sign In";
+                plabel.style.display = "inLine";
+                //add login event
+
+                btnSign.addEventListener("click", function () {
+                    //Needs a if statment that checks email with a find query. if email is used AND in database, continue on home page.
+                    // else, send a alert to webpage
+
+
+                    if (btnSign.innerHTML == "Login") {
+                        //When logged in, hide all login info and display buttons
+                        forgotpassbtn.style.display = "none";
+                        eMail.style.display = "none";
+                        pass.style.display = "none";
+                        btnSign.innerHTML = "Logout";
+                        eLabel.style.display = "none";
+                        pLabel.style.display = "none";
+
+
+                        // Greet logged in User with database options
+                        welcome.innerHTML = "Hello, " + eMail.value;
+                        btnC.style.display = "inLine";
+                        btn1.style.display = "inLine";
+                        btnOrg.style.display = "inLine";
+                        btnDel.style.display = "inLine";
+                        //These options above are all options for admin user.
+                        //Later on when contected, Flied of isAdmin will be check to block non admins option of delete
+
+                    } else {
+                        //When user "signs out", Hide logged in functions and "return" to home page
+                        eMail.style.display = "inLine";
+                        pass.style.display = "inLine";
+                        eLabel.style.display = "inLine";
+                        pLabel.innerHTML = "Password:";
+                        pLabel.style.display = "inLine";
+                        welcome.innerHTML = "Sign In";
+                        forgotpassbtn.style.display = "inLine";
+                        btnSign.innerHTML = "Login";
+
+                        btn1.style.display = "none";
+                        btnOrg.style.display = "none";
+                        btnC.style.display = "none";
+                        btnDel.style.display = "none";
+                    }
+                });
+
+
+
+            </script>
+    </body>
+
+    <%- include('partials/footer'); %>
+
+</html>
