@@ -8,7 +8,7 @@ const port=5000;
 const Email=require('./models/server')
 const fs= require('fs');
 const path= require('path');
-var formidable= require('formidable');//For retrieving user input from the forms
+var formidable= require('formidable');//For retrieving user input from the inputforms
 
 //Uses static flies in public folder
 server.use(express.static('public'))
@@ -56,6 +56,7 @@ server.post('/file_upload',(req,res)=>{
         }
         /*Code:takes the incoming file from the temp folder path and changes it to the upload folder under file name
         Code adapated from W3school: (https://www.w3schools.com/nodejs/nodejs_uploadfiles.asp) DONT DELETE COMMENT*/
+
         var temPath=files.orgEmail.path;
         var fileName=files.orgEmail.name;
         var path="upload/"+fileName;
@@ -63,7 +64,7 @@ server.post('/file_upload',(req,res)=>{
             if(err) throw error;
             console.log('Original file uploaded to folder \n Send user to home page and start analysis');
         });
-        //function(fileName);
+        //esumAnalysis(fileName); the start of the anaylsis program
         res.redirect('/');
     });
 });
