@@ -1,25 +1,28 @@
+
+
 //import
 const express=require('express')
 const mongoose=require('mongoose')
 const server=express()
 const port=5000;
 const Email=require('./models/server')
+const fs= require('fs');
+const path= require('path');
+var formidable= require('formidable');//For retrieving user input from the forms
 
-//Uses static flies from 
+//Uses static flies in public folder
 server.use(express.static('public'))
 server.use('/css',express.static(__dirname+'public/css'))
 
+//mongodb driver from mongodb site, fix error from last time
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://testUser:1234@cluster0.4imml.mongodb.net/EsumDB?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  console.log("Connected to Mongodb")
+  client.close();
+});
 
-//connect to data with connection string
-//const dbstring="'mongodb+srv://testUser:1234@cluster0.4imml.mongodb.net/EsumDB?retryWrites=true&w=majority';"
-//mongoose.connect(dbstring,{useNewUrlParser: true, useUnifiedTopology: true})
-//.then((result)=>server.listen(5000))
-// .catch((err)=>console.log(err));
-
-
-
-//set views, how to change to ejs
-//set views to change view engine to ejs
 server.set('view engine','ejs')
 server.set('views','./views')
 
@@ -40,12 +43,38 @@ server.get('/about',(req,res)=>{
     res.render('about')
 })
 
+// Handle the POST request for file upload. Vyanna
+server.post('/file_upload',(req,res)=>{
+    var form= new formidable.IncomingForm();
+    form.parse(req,(err,fields,files)=>{
+        if(err){
+            console.log(err);
+            res.redirect('/');
+            throw err;
+            //logs error,redirect page, and throws error
+            //later will add function for a alert on page
+        }
+        /*Code:takes the incoming file from the temp folder path and changes it to the upload folder under file name
+        Code adapated from W3school: (https://www.w3schools.com/nodejs/nodejs_uploadfiles.asp) DONT DELETE COMMENT*/
+        var temPath=files.orgEmail.path;
+        var fileName=files.orgEmail.name;
+        var path="upload/"+fileName;
+        fs.rename(temPath,path,(err)=>{
+            if(err) throw error;
+            console.log('Original file uploaded to folder \n Send user to home page and start analysis');
+        });
+        //function(fileName);
+        res.redirect('/');
+    });
+});
 // The /login when suer presses to login 
 //server.get('/login',(req,res)=>{
     
 //})
 
+//server.get('/fgpass',(req,res)=>{}0
 
+//function esumAnalysis(){}
 
 
 //creates port 5000 and listen for activity go to localhost:5000 to see
