@@ -4,10 +4,10 @@
 <!--Vyanna, any unnamed comment is the work above unless marked-->
 <!DOCTYPE html>
 <html lang="en">
-<%- include('partials/header'); %>
+<%- include('partials/head'); %>
 
     <body>
-
+        <%- include('partials/header'); %>
 
         <%- include('partials/nav'); %>
             <!--There will be three pages, the home is where the function happens-->
@@ -52,10 +52,10 @@
                 <p>
                     Upload your Email file below
 
-                <form action="Linktoservernodejs/file_upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="Emaillog" />
-                    <br>
-                    <input type="submit" value="Upload">
+                <form action="/file_upload" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="orgEmail" accept=".txt">
+                        <br>
+                        <input type="submit" value="Upload">
                 </form>
                 <!--NODEjs way of submitting forms to the database, express server will listen for input-->
                 <small>How to transfer your email log to a file? Check our <a href="/faq">FAQ</a> </small>
